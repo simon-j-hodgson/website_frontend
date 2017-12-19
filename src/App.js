@@ -21,19 +21,27 @@ class App extends Component {
     return (
       <div className="App">            
 
-        <Navbar inverse fixedTop >
+        <Navbar inverse fixedTop collapseOnSelect >
           <Navbar.Header>
               <Navbar.Brand>
                 <a href="/">Simon Hodgson</a>
-                </Navbar.Brand>              
+                </Navbar.Brand>
+                <Navbar.Toggle />              
           </Navbar.Header> 
+          
+          <Navbar.Collapse >
           <Nav pullRight>
             <NavItem>Login</NavItem>
             <NavDropdown title="Admin">
               <MenuItem>Events</MenuItem>
               <MenuItem>Upload</MenuItem>
             </NavDropdown>
-          </Nav>
+            <NavDropdown title="Links">
+              <MenuItem href="https://www.nickelarse.com">Nick Lee</MenuItem>
+              <MenuItem href="https://www.mercian.org.uk">Mercian MC</MenuItem>
+            </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
 
        <div className="container">   

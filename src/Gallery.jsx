@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Row, Breadcrumb} from 'react-bootstrap';
+import { Grid, Row, Col, Breadcrumb} from 'react-bootstrap';
 import  Lightbox  from 'react-image-lightbox';
 import { Link } from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
@@ -198,8 +198,8 @@ export default class Gallery extends React.Component {
                 </div>
 
                 <div className="album text-muted"> 
-                <Grid > 
-                    <Row >{cards}</Row>
+                <Grid className="text-center"> 
+                    <Row  >{cards}</Row>
                 </Grid>
                 </div>
             </div>
@@ -257,7 +257,7 @@ class GalleryCard extends React.Component {
 
         return (               
 
-            <div className="card">
+            <Col className="card" lg={4} md={6} xs={12}>
                 <div className="img-container">
                     <div className="img-clip" onMouseEnter={this.mouseEnter.bind(this)} onMouseLeave={ this.mouseLeave.bind(this) }>
                         <Link to={ encodeURI(url)} onClick={onClickFunc} >
@@ -268,7 +268,7 @@ class GalleryCard extends React.Component {
             </div>
 
             <p className="card-text">&nbsp;{title}&nbsp;</p>
-            </div>
+            </Col>
         );
     }
 }
