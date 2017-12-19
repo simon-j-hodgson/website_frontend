@@ -3,9 +3,9 @@ import { NavDropdown, Navbar, Nav, NavItem, Grid, MenuItem, } from 'react-bootst
 import Gallery from './Gallery.jsx';
 import GalleryYear from './GalleryYear.jsx';
 import GalleryEvent from './GalleryEvent.jsx';
+import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import './Album.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import { Switch, Route } from 'react-router-dom';
 
 import { LinkContainer } from 'react-router-bootstrap';
