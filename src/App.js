@@ -7,14 +7,14 @@ import './App.css';
 import './Album.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Switch, Route } from 'react-router-dom';
-import ReactGA from 'react-ga'
+
+import { LinkContainer } from 'react-router-bootstrap';
 
 class App extends Component {
 
   constructor(props) {
     super(props)
-    ReactGA.initialize('UA-41407998-1');
-    ReactGA.pageview(window.location.pathname + window.location.search);
+
   }
 
   render() {
@@ -23,10 +23,10 @@ class App extends Component {
 
         <Navbar inverse fixedTop collapseOnSelect >
           <Navbar.Header>
-              <Navbar.Brand>
-                <a href="/">Simon Hodgson</a>
-                </Navbar.Brand>
-                <Navbar.Toggle />              
+            <LinkContainer to="/">
+              <Navbar.Brand>Simon Hodgson</Navbar.Brand>
+            </LinkContainer>
+            <Navbar.Toggle />              
           </Navbar.Header> 
           
           <Navbar.Collapse >
