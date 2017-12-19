@@ -153,9 +153,18 @@ export default class Gallery extends React.Component {
 
             var lb;
 
+            const customStyles = {
+                overlay: {
+                    zIndex: 2000
+                }
+            }
+
             if (photoIndex != null && (photos.length > 0)) {
                 lb =   
                 <Lightbox 
+
+                reactModalStyle={customStyles}
+
                 mainSrc={photoBaseUrl + "/photos/" + photos[photoIndex].photo_id + ".jpg"} 
                 mainSrcThumbnail={photoBaseUrl + "/thumbnails/" + photos[photoIndex].photo_id + ".jpg"}
                 

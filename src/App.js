@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div className="App">            
 
-        <Navbar>
+        <Navbar inverse fixedTop >
           <Navbar.Header>
               <Navbar.Brand>
                 <a href="/">Simon Hodgson</a>
@@ -35,7 +35,9 @@ class App extends Component {
             </NavDropdown>
           </Nav>
         </Navbar>
-          
+
+       <div className="container">   
+       
         <Grid>
 
         <Switch>
@@ -47,7 +49,8 @@ class App extends Component {
 
         
          </Grid>
-      
+
+         </div>
 
       </div>
     );
