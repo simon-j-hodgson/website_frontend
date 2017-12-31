@@ -1,13 +1,58 @@
-import React, { Component } from 'react';
-import { Modal, ModalHeader,Label, FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
+import React from 'react';
+import { Modal, ModalHeader, FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
+
+var baseUrl;
+
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+
+    baseUrl = "http://localhost:8080";
+}
+else {
+    baseUrl = "/api";
+}
 
 
 export default class Gallery extends React.Component {
   
+
+    constructor (props) {
+        super(props);
+    
+        this.state = {
+            email: '',
+            password: ''
+        };
+    
+      }
+
     handleLogin() {
 
+        var postData = {
+            email: this.state.email,
+            password: this.state.password
+        };
+
+        fetch( baseUrl + '/login', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(postData)
+        })
+        .then ( response => response.json() )
+        .then ( res => this.props.onSucess(res) );
+
         this.props.onClose();
+    }
+
+    emailChange(event) {
+        this.setState({email: event.target.value});
+    }
+
+    passwordChange (event) {
+        this.setState({password: event.target.value});
     }
 
     render() {
@@ -23,11 +68,15 @@ export default class Gallery extends React.Component {
                     type="email"
                     label="Email address"
                     placeholder="email@address.com"
+                    value = {this.state.email}
+                    onChange= {this.emailChange.bind(this)}
                      />
                     <FieldGroup
                     id="formControlsPassword"
                     label="Password"
                     type="password"
+                    value = {this.state.password}
+                    onChange = {this.passwordChange.bind(this)}
                     />
 
                 

@@ -217,7 +217,6 @@ class GalleryCard extends React.Component {
     }
 
     mouseEnter(){
-        console.log('mouse enter');
         this.setState( {showHover: true });
     }
 

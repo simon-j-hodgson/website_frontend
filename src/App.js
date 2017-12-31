@@ -19,7 +19,9 @@ class App extends Component {
   constructor (props) {
     super(props);
 
-    this.state = { showLogin: false };
+    this.state = { showLogin: false,
+                  loggedIn: false,
+                  user: null };
 
   }
 
@@ -31,7 +33,31 @@ class App extends Component {
     this.setState({showLogin: true});
   }
 
+  loginSucess(user) {
+      this.setState({loggedIn: true,
+              user: user});
+  }
+
+  logout() {
+    this.setState({loggedIn: false,
+      user: null});
+  }
+
   render() {
+
+    var userItem = null;
+
+    if (this.state.loggedIn !== true) {
+        userItem = (
+        <NavItem onClick={this.showLogin.bind(this) }><FontAwesome name='sign-in' />&nbsp;Login</NavItem>
+      )
+    }
+    else {
+        userItem = (
+        <NavItem onClick={this.logout.bind(this) }><FontAwesome name='sign-out' />&nbsp;Logout</NavItem>
+        )
+    }
+
     return (
       <div className="App">            
 
@@ -46,23 +72,25 @@ class App extends Component {
           <Navbar.Collapse >
           <Nav pullRight>
             
-            <NavDropdown title="Admin">
+            {this.state.loggedIn && (
+            <NavDropdown title="Admin" id="adminMenu">
               <LinkContainer to="/EventAdmin"><MenuItem>Events</MenuItem></LinkContainer>
               <MenuItem>Upload</MenuItem>
             </NavDropdown>
-            <NavDropdown title="Links">
+            )}
+            <NavDropdown title="Links" id="linksMenu"  >
               <MenuItem href="https://www.nickelarse.com"><FontAwesome name='bicycle' fixedWidth />&nbsp;Nick Lee</MenuItem>
               <MenuItem href="https://www.mercian.org.uk"><FontAwesome name='map-signs' fixedWidth />&nbsp;Mercian MC</MenuItem>
               <MenuItem href="https://github.com/simon-j-hodgson/"><FontAwesome name='github' fixedWidth />&nbsp;GitHub</MenuItem>
               <MenuItem href="https://www.facebook.com/simon.hodgson"><FontAwesome name='facebook' fixedWidth />&nbsp;Facebook</MenuItem>
               <MenuItem href="https://www.instagram.com/snow_geek/"><FontAwesome name='instagram' fixedWidth />&nbsp;Instagram</MenuItem>
             </NavDropdown>
-            <NavItem onClick={this.showLogin.bind(this) }><FontAwesome name='sign-in' />&nbsp;Login</NavItem>
+           {userItem}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
 
-      <LoginBox showLogin={this.state.showLogin} onClose={this.handleClose.bind(this)} />
+      <LoginBox showLogin={this.state.showLogin} onClose={this.handleClose.bind(this)} onSucess={this.loginSucess.bind(this)} />
 
        <div className="container">   
        
