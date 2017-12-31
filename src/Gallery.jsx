@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col, Breadcrumb} from 'react-bootstrap';
+import FontAwesome from 'react-fontawesome';
 import  Lightbox  from 'react-image-lightbox';
 import { Link } from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
@@ -18,13 +19,12 @@ else {
     photoBaseUrl = "";
 }
 
-
-
 export default class Gallery extends React.Component {
       
     static contextTypes = {
         router: PropTypes.object
       }
+
     constructor(props,context) {
         super(props, context);       
 
@@ -299,7 +299,7 @@ class GalleryBreadcrumb extends React.Component {
         return (
 
             <Breadcrumb className="text-left">
-                <LinkContainer to="/"><Breadcrumb.Item>Home</Breadcrumb.Item></LinkContainer>
+                <LinkContainer to="/"><Breadcrumb.Item><FontAwesome name='home' />&nbsp;Home</Breadcrumb.Item></LinkContainer>
                 {yearBreadcrumb}
                 {eventBreadcrumb}
             </Breadcrumb>

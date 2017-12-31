@@ -1,20 +1,34 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import { NavDropdown, Navbar, Nav, NavItem, Grid, MenuItem, } from 'react-bootstrap';
+import FontAwesome from 'react-fontawesome';
 import Gallery from './Gallery.jsx';
 import GalleryYear from './GalleryYear.jsx';
 import GalleryEvent from './GalleryEvent.jsx';
+import LoginBox from './LoginBox.jsx';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import './Album.css';
-import { Switch, Route } from 'react-router-dom';
+
+
 
 import { LinkContainer } from 'react-router-bootstrap';
 
 class App extends Component {
 
-  constructor(props) {
-    super(props)
+  constructor (props) {
+    super(props);
 
+    this.state = { showLogin: false };
+
+  }
+
+  handleClose() {
+    this.setState({showLogin: false});
+  }
+
+  showLogin() {
+    this.setState({showLogin: true});
   }
 
   render() {
@@ -31,18 +45,24 @@ class App extends Component {
           
           <Navbar.Collapse >
           <Nav pullRight>
-            <NavItem>Login</NavItem>
+            
             <NavDropdown title="Admin">
-              <MenuItem>Events</MenuItem>
+              <LinkContainer to="/EventAdmin"><MenuItem>Events</MenuItem></LinkContainer>
               <MenuItem>Upload</MenuItem>
             </NavDropdown>
             <NavDropdown title="Links">
-              <MenuItem href="https://www.nickelarse.com">Nick Lee</MenuItem>
-              <MenuItem href="https://www.mercian.org.uk">Mercian MC</MenuItem>
+              <MenuItem href="https://www.nickelarse.com"><FontAwesome name='bicycle' fixedWidth />&nbsp;Nick Lee</MenuItem>
+              <MenuItem href="https://www.mercian.org.uk"><FontAwesome name='map-signs' fixedWidth />&nbsp;Mercian MC</MenuItem>
+              <MenuItem href="https://github.com/simon-j-hodgson/"><FontAwesome name='github' fixedWidth />&nbsp;GitHub</MenuItem>
+              <MenuItem href="https://www.facebook.com/simon.hodgson"><FontAwesome name='facebook' fixedWidth />&nbsp;Facebook</MenuItem>
+              <MenuItem href="https://www.instagram.com/snow_geek/"><FontAwesome name='instagram' fixedWidth />&nbsp;Instagram</MenuItem>
             </NavDropdown>
+            <NavItem onClick={this.showLogin.bind(this) }><FontAwesome name='sign-in' />&nbsp;Login</NavItem>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
+
+      <LoginBox showLogin={this.state.showLogin} onClose={this.handleClose.bind(this)} />
 
        <div className="container">   
        
@@ -55,7 +75,6 @@ class App extends Component {
           <Route path="/" component={Gallery}/>
         </Switch>
 
-        
          </Grid>
 
          </div>

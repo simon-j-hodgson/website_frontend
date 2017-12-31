@@ -6,15 +6,8 @@ export default class GalleryEvent extends React.Component
 {
     render() {
 
-        var photoIndex = null;
-
-        //if (this.props.match.params.photoIndex) {
-            photoIndex = this.props.match.params.photoIndex; 
-       // }
-        //else {
-          //  photoIndex = 'none';
-        //}
-
+      var photoIndex = this.props.match.params.photoIndex; 
+       
       return (
         
         <Gallery mode='photo-select' eventId={this.props.match.params.eventId} photoIndex={photoIndex} / >

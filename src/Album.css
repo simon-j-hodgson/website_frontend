@@ -74,3 +74,7 @@ body {
   footer p {
     margin-bottom: .25rem;
   }
+
+  a, a:active, a:focus {
+    outline:none;
+  }
