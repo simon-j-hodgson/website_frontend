@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, ModalHeader, FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
+import { Modal, ModalHeader, FormGroup, ControlLabel, FormControl, HelpBlock, Button, Alert } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 
 var baseUrl;
@@ -42,9 +42,11 @@ export default class Gallery extends React.Component {
               body: JSON.stringify(postData)
         })
         .then ( response => response.json() )
-        .then ( res => this.props.onSucess(res) );
+        .then ( response => {this.props.onSucess(response);
+                            this.props.onClose();} )
+        .catch ( this.setState({loginFailed: true}) );
 
-        this.props.onClose();
+        
     }
 
     emailChange(event) {
@@ -55,6 +57,10 @@ export default class Gallery extends React.Component {
         this.setState({password: event.target.value});
     }
 
+    reset() {
+        this.setState({email: '', password: '', loginFailed: false});
+    }
+
     render() {
 
         return (
@@ -62,6 +68,12 @@ export default class Gallery extends React.Component {
             <Modal show={this.props.showLogin} onHide={this.props.onClose}>
                 <ModalHeader closeButton>Login</ModalHeader>
                 <Modal.Body>
+
+                { this.state.loginFailed && (
+                <Alert bsStyle="danger">
+                    <strong>Failed</strong> Your email address and password were not recognised, please try again.
+                </Alert>
+                )}
                 <form> 
                      <FieldGroup
                     id="formControlsEmail"

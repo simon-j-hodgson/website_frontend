@@ -30,6 +30,7 @@ class App extends Component {
   }
 
   showLogin() {
+    this.loginbox.reset();
     this.setState({showLogin: true});
   }
 
@@ -90,7 +91,7 @@ class App extends Component {
           </Navbar.Collapse>
         </Navbar>
 
-      <LoginBox showLogin={this.state.showLogin} onClose={this.handleClose.bind(this)} onSucess={this.loginSucess.bind(this)} />
+      <LoginBox ref={instance => { this.loginbox = instance; }} showLogin={this.state.showLogin} onClose={this.handleClose.bind(this)} onSucess={this.loginSucess.bind(this)} />
 
        <div className="container">   
        
