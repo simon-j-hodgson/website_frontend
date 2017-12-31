@@ -41,10 +41,14 @@ export default class Gallery extends React.Component {
               },
               body: JSON.stringify(postData)
         })
-        .then ( response => response.json() )
+        .then ( response => { if (!response.ok) {
+                                throw new Error('Login Failed (HTTP Response ' + response.status + ')');
+                            }
+                            response.json();} )
         .then ( response => {this.props.onSucess(response);
                             this.props.onClose();} )
-        .catch ( this.setState({loginFailed: true}) );
+        .catch ( error=> {  console.log(error);
+                            this.setState({loginFailed: true}) } );
 
         
     }
