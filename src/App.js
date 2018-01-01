@@ -6,6 +6,7 @@ import Gallery from './Gallery.jsx';
 import GalleryYear from './GalleryYear.jsx';
 import GalleryEvent from './GalleryEvent.jsx';
 import LoginBox from './LoginBox.jsx';
+import EventAdmin from './EventAdmin.jsx';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import './Album.css';
@@ -75,7 +76,7 @@ class App extends Component {
             
             {this.state.loggedIn && (
             <NavDropdown title="Admin" id="adminMenu">
-              <LinkContainer to="/EventAdmin"><MenuItem>Events</MenuItem></LinkContainer>
+              <LinkContainer to="/eventadmin"><MenuItem>Events</MenuItem></LinkContainer>
               <MenuItem>Upload</MenuItem>
             </NavDropdown>
             )}
@@ -101,6 +102,7 @@ class App extends Component {
           <Route path="/years/:year" component={GalleryYear} />
           <Route path="/event/:eventId/:title" component={GalleryEvent}  />
           <Route path="/photo/:eventId/:title/:photoIndex" component={GalleryEvent}  />
+          <Route path="/eventadmin" component={EventAdmin}/>
           <Route path="/" component={Gallery}/>
         </Switch>
 

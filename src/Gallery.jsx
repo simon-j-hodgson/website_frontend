@@ -38,7 +38,6 @@ export default class Gallery extends React.Component {
              };
     }
 
-
     componentDidMount () {
 
         var mode = 'year-select';
@@ -130,7 +129,7 @@ export default class Gallery extends React.Component {
                                 thumb_x={event.photo.thumb_x} 
                                 thumb_y={event.photo.thumb_y} 
                                 title={event.title} 
-                                url = {"/event/" + event.event_id + "/" + event.title.replace(/ /g,"-")}/> 
+                                url = {"/event/" + event.event_id + "/" + event.title.replace(/[ /]/g,"-")}/> 
                 
                     );
                 }
@@ -146,7 +145,7 @@ export default class Gallery extends React.Component {
                                 thumb_x={photo.thumb_x} 
                                 thumb_y={photo.thumb_y} 
                                 title={photo.title} 
-                                url = {"/photo/" + this.props.eventId + "/" + events[0].title.replace(/ /g,"-") + "/" + index} /> 
+                                url = {"/photo/" + this.props.eventId + "/" + events[0].title.replace(/[ /]/g,"-") + "/" + index} /> 
                     );
                 }
             }
@@ -178,11 +177,11 @@ export default class Gallery extends React.Component {
 
                 imageCaption={"\u00a9 "+photos[photoIndex].taken_by}
 
-                onMoveNextRequest={() => this.context.router.history.push("/photo/"+events[0].event_id + "/" + events[0].title.replace(/ /g,"-") +"/" + (parseInt(photoIndex,10) + 1) % photos.length) }
+                onMoveNextRequest={() => this.context.router.history.push("/photo/"+events[0].event_id + "/" + events[0].title.replace(/[ /]/g,"-") +"/" + (parseInt(photoIndex,10) + 1) % photos.length) }
                 
-                onMovePrevRequest={() => this.context.router.history.push("/photo/"+events[0].event_id + "/" + events[0].title.replace(/ /g,"-") +"/" + (parseInt(photoIndex,10) + photos.length - 1) % photos.length) }
+                onMovePrevRequest={() => this.context.router.history.push("/photo/"+events[0].event_id + "/" + events[0].title.replace(/[ /]/g,"-") +"/" + (parseInt(photoIndex,10) + photos.length - 1) % photos.length) }
                 
-                onCloseRequest={() => this.context.router.history.push("/event/"+events[0].event_id + "/" + events[0].title.replace(/ /g,"-")) }
+                onCloseRequest={() => this.context.router.history.push("/event/"+events[0].event_id + "/" + events[0].title.replace(/[ /]/g,"-")) }
                                            
                 />
             }

@@ -78,7 +78,7 @@ export default class Gallery extends React.Component {
                     <strong>Failed</strong> Your email address and password were not recognised, please try again.
                 </Alert>
                 )}
-                <form> 
+                <form onSubmit={this.handleLogin.bind(this)}> 
                      <FieldGroup
                     id="formControlsEmail"
                     type="email"
