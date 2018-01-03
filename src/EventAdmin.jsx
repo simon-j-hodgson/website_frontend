@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Table} from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
+import EventEdit from './EventEdit';
+import PhotoUpload from './PhotoUpload';
 
 var baseUrl;
 
@@ -12,6 +14,8 @@ else {
     baseUrl = "/api";
 }
 
+
+
 export default class EventAdmin extends React.Component {
 
     constructor (props) {
@@ -19,6 +23,7 @@ export default class EventAdmin extends React.Component {
     
         this.state = { events: null };
     
+        this.eventEdit = null;
       }
 
     componentWillMount() {
@@ -26,6 +31,26 @@ export default class EventAdmin extends React.Component {
         fetch( baseUrl + '/events/')
         .then ( response => response.json() )
         .then ( data => this.setState( { events: data.events}) );
+    }
+
+    editClick(event) {
+        this.setState({EditActive: true,
+                    event: event});
+        this.eventEdit.setEvent(event);
+    }
+
+    editClose() {
+        this.setState({EditActive: false});
+    }
+
+    uploadClose() {
+        this.setState({UploadActive: false});
+    }
+
+    uploadClick(event) {
+        this.setState({UploadActive: true,
+                    event: event});
+        this.photoUpload.setEvent(event);
     }
 
     render() {
@@ -39,13 +64,20 @@ export default class EventAdmin extends React.Component {
         if (events) {
 
             rows = events.map( (event, index) => 
-                <EventRow key={event.event_id} event={event} />
+                <EventRow key={event.event_id} event={event} onEditClick={this.editClick.bind(this)} onUploadClick={this.uploadClick.bind(this)} />
             );
 
         }
 
         return (
             
+            <div>
+
+            <EventEdit ref={instance => { this.eventEdit = instance; }} event={this.state.event} showEventEdit={this.state.EditActive} onClose={this.editClose.bind(this)} />
+
+            <PhotoUpload ref={instance => { this.photoUpload = instance; }} event={this.state.event} showPhotoUpload={this.state.UploadActive} onClose={this.uploadClose.bind(this)} />
+
+
             <Table striped>
             <thead>
             <tr>
@@ -59,18 +91,21 @@ export default class EventAdmin extends React.Component {
             </tbody>
             </Table>
             
+            </div>
         );
     }
 }
 
 class EventRow extends React.Component {
 
+
     render () {
         return (
             <tr>
             <td>{this.props.event.title}</td>
             <td>{this.props.event.date}</td>
-            <td><Button><FontAwesome name='pencil' />&nbsp;Edit</Button></td>
+            <td><Button onClick={() => this.props.onEditClick(this.props.event)}><FontAwesome name='pencil' />&nbsp;Edit</Button></td>
+            <td><Button onClick={() => this.props.onUploadClick(this.props.event)}><FontAwesome name='cloud-upload' />&nbsp;Upload</Button></td>
             </tr>
         )
     }
